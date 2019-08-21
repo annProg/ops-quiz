@@ -1,11 +1,7 @@
 ---
-title: 文章标题
-author:          # 作者（数组）
-  - 作者
+title: 运维工程师笔试题目
 date: \today     # 日期
+toc: false
 lof: false        # 是否生成插图列表页
 lot: false        # 是否生成表格列表页
-homepage: https://github.com/annProg/PanBook
-nocite: |
-  @pandocManual,@foz
 ...
