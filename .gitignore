@@ -1,0 +1,11 @@
+*.aux
+*.gz
+*.toc
+*.log
+*.out
+build
+*.pdf
+*.fdb_latexmk
+*.fls
+*.xdv
+*.dvi
