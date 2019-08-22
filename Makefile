@@ -5,8 +5,8 @@ all: build clean
 build: quiz
 
 quiz:
-	panbook art --style=elegantpaper $(DEBUG) $(CJK)
+	panbook art --style=elegantpaper $(DEBUG) $(CJK) -G ext-wrap-noanswer:true
 solution:
-	panbook art --style=elegantpaper $(DEBUG) $(CJK) -G ext-zh_en-lang:en
+	panbook art --style=elegantpaper $(DEBUG) $(CJK)
 clean:
 	panbook clean

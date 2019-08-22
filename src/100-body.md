@@ -3,7 +3,7 @@
 
 (@) 列出你知道的 Linux 发行版及其 *包管理工具*。
 
-:::{.en}
+:::{.solu}
 发行版 | 包管理工具
 :----|:-----
 CentOS | yum
@@ -15,7 +15,7 @@ Arch Linux | pacman
 
 (@) 查看服务器的 RAID 级别。
 
-:::{.en}
+:::{.solu}
 ```bash
 MegaCli -ldinfo -lall -aall
 ```
@@ -23,7 +23,7 @@ MegaCli -ldinfo -lall -aall
 
 (@) 查看服务器的物理硬盘数量和大小。
 
-:::{.en}
+:::{.solu}
 ```bash
 MegaCli -pdlist -aall
 ```
@@ -31,7 +31,7 @@ MegaCli -pdlist -aall
 
 (@) Linux 系统新增了一块硬盘（/dev/sdb），请将其格式化为 xfs 系统并挂载到 /data。
 
-:::{.en}
+:::{.solu}
 ```bash
 # mkdir /data
 # echo -e "n\np\n\n\n\nw" |fdisk /dev/sdb
@@ -42,13 +42,13 @@ MegaCli -pdlist -aall
 
 (@) 假设 /dev/sdb1 挂载到 /data1 上，当 /dev/sdb1 故障时，/data1 目录会成为根目录（/）下的一个普通文件夹，数据可能会继续写入导致根目录被占满，如何避免这种情况。
 
-:::{.en}
+:::{.solu}
 先执行 chattr +i /data1，再挂载
 :::
 
 (@) 查找 9099 端口被什么进程占用
 
-::: {.en}
+::: {.solu}
 ```bash
 # lsof -i :9099
 # ss -antp |grep 9099
