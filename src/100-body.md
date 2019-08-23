@@ -1,5 +1,5 @@
 
-# 10 分题（500 分）
+# 2 分题（60 分）
 
 (@) 列出你知道的 Linux 发行版及其 *包管理工具*。
 
@@ -8,6 +8,30 @@
 - apt:  Debian, Ubuntu, Deepin
 - apk:  Alpine
 - pacman:  Arch Linux
+:::
+
+(@) 列出你知道的容器编排软件。
+
+::: {.solu}
+Kubernetes, Docker Swarm, Mesos + Marathon
+:::
+
+(@) 列出你知道的开源存储系统。
+
+::: {.solu}
+Ceph, GlusterFS, HDFS, Minio
+:::
+
+(@) 列出你知道的监控工具。
+
+::: {.solu}
+Zabbix, Prometheus, Open-falcon, TICK
+:::
+
+(@) 列出你知道的持续集成工具。
+
+::: {.solu}
+Jekins, Drone, Gitlab CI
 :::
 
 (@) 你知道或者用过那些虚拟机管理软件？
@@ -104,6 +128,12 @@ XShell, Putty,
 2. /etc/hosts,  curl -H "Host: domain"
 :::
 
+(@) 请列出常见的应用层协议及其默认端口。
+
+::: {.solu}
+http 80, https 443, smtp 25, ftp 21, ssh 22, dns 53
+:::
+
 (@) 常见 HTTP 状态码及其含义。
 
 ::: {.solu}
@@ -141,9 +171,26 @@ ss -ant |awk '{print $1}' |sort |uniq -c |sort -n
 
 (@) git 如何拉取代码，创建分支，提交代码，push 代码？
 
+::: {.solu}
+git pull, git checkout -b, git commit, git push
+:::
+
 (@) docker 镜像仓库允许提交重复的 tag，为了防止提交了重复的 tag，计划使用代码库（git）的 tag 作为 docker 镜像的 tag，如果代码库没有 tag，则用 revision id 做为镜像 tag，比如，一个镜像的 tag 可能是 `v1.3-738-g1211a2e`。请写一个 Makefile 实现此需求。
 
-# 50 分题（500 分）
+::: {.solu}
+```makefile
+TAG = $(git describe --always --dirty)
+IMAGE = registry/xxx/image
+build:
+	docker build -t $(IMAGE):$(TAG) .
+	docker tag $(IMAGE):$(TAG) $(IMAGE):latest
+push:
+	docker push $(IMAGE):$(TAG)
+	docker push $(IMAGE):latest
+```
+:::
+
+# 8 分题（40 分）
 
 (@) 假设服务器 root 密码管理存在以下问题：a) 所有服务器使用少数几个 root 密码； b) root 密码基本不变更； c) root 密码未加密存储，并且会被有些员工直接记录到 wiki 上；d) 有员工直接使用 root 密码登录，难以审计。请设计一个 root 密码管理方案，实现 root 密码的随机生成，加密存储及限制查询和使用。（提示：可以考虑使用 gpg 加密 root 密码）
 
@@ -159,15 +206,13 @@ ss -ant |awk '{print $1}' |sort |uniq -c |sort -n
 
 (@) 德国数学家莱布尼兹（1646-1716）发现了这样一个事实，数学常量 $\pi$ 可以使用下面的数学公式计算：
 $$\frac{\pi}{4}\approx 1-\frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \frac{1}{9} - \frac{1}{11} + \cdots $$
-等式右边是一个无限序列，每一个分数表示序列中的一项。如果从 1 开始，则减三分之一，加五分之一，等等。对每一个奇数整数进行下去，就会逐渐逼近 $\pi / 4$ 的值。请用任意语言编写一个程序，以莱布尼兹序列的前 10,000 项计算 $\pi$ 的近似值。
+等式右边是一个无限序列，每一个分数表示序列中的一项。如果从 1 开始，则减三分之一，加五分之一，等等。对每一个奇数整数进行下去，就会逐渐逼近 $\pi$/4 的值。请用任意语言编写一个程序，以莱布尼兹序列的前 10,000 项计算 $\pi$ 的近似值。
 
 ::: {.solu}
 ```bash
 echo |awk '{sum=0;t=1;for(i=1;i<10001;i++) {sum=sum-(-1)^(i%2)/t;t=t+2}}END{print 4*sum}'
 ```
 :::
-
-(@) 
 
 (@) 请用任意编程语言将 数字 1234 翻转为 4321。
 
