@@ -1,13 +1,10 @@
 
-# 2 分题（60 分）
+# 2 分题（50 分）
 
 (@) 列出你知道的 Linux 发行版及其 *包管理工具*。
 
 :::{.solu}
-- yum:  CentOS, Redhat, Fedora
-- apt:  Debian, Ubuntu, Deepin
-- apk:  Alpine
-- pacman:  Arch Linux
+yum:  CentOS, Redhat, Fedora；apt:  Debian, Ubuntu, Deepin；apk:  Alpine；pacman:  Arch Linux
 :::
 
 (@) 列出你知道的容器编排软件。
@@ -87,10 +84,10 @@ hpssacli ctrl all show config
 
 :::{.solu}
 ```bash
-# mkdir /data
-# echo -e "n\np\n\n\n\nw" |fdisk /dev/sdb
-# mkfs.xfs /dev/sdb1
-# mount -t xfs /dev/sdb1 /data
+mkdir /data
+echo -e "n\np\n\n\n\nw" |fdisk /dev/sdb
+mkfs.xfs /dev/sdb1
+mount -t xfs /dev/sdb1 /data
 ```
 :::
 
@@ -104,8 +101,8 @@ hpssacli ctrl all show config
 
 ::: {.solu}
 ```bash
-# lsof -i :9099
-# ss -antp |grep 9099
+lsof -i :9099
+ss -antp |grep 9099
 ```
 :::
 
@@ -118,14 +115,14 @@ hpssacli ctrl all show config
 (@) 常用的远程登录 Linux 服务器的工具有哪些？
 
 ::: {.solu}
-XShell, Putty, 
+XShell, Putty, OpenSSH
 :::
 
 (@) 如何设置 nameserver？某个业务的域名即将迁移到新的 IP，如何事先测试域名用新 IP 是否正常工作？
 
 ::: {.solu}
 1. /etc/resolv.conf
-2. /etc/hosts,  curl -H "Host: domain"
+2. /etc/hosts,  curl -H "Host: domain" http://IP/location
 :::
 
 (@) 请列出常见的应用层协议及其默认端口。
@@ -226,4 +223,12 @@ echo 1234 |awk '{t=0;for(n=$1;n>0;n=int(n/10)){t=n%10 + t*10}}END{print t}'
 
 ::: {.solu}
 未关闭 HTTP 请求。HTTP 服务端主动关闭请求，但是程序没有关闭连接，一直停留在 `close-wait` 状态，导致端口被占满。
+:::
+
+# 10 分题（10 分）
+
+(@) 请谈谈你为运维这个职位做过什么准备？你认为你擅长哪些知识或技能？
+
+::: {.solu}
+开放作答
 :::
