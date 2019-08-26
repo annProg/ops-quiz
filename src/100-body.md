@@ -203,13 +203,35 @@ push:
 
 (@) 已知可以通过扇形的近似面积计算 $\pi$ 的近似值。考虑下图左侧的四分之一圆。该圆半径 $r$ 为 2 厘米。由圆的面积公式可以轻易地知道该四分之一圆的面积为 $\pi$ 平方厘米。也可以使用一系列长方形（这些长方形的宽度相同，高度由圆心穿过每个长方形顶部的中点来决定）的面积之和计算它的近似面积。例如，从左至右，将该四分之一圆分为 10 个长方形，如下图右侧所示。
 
-![通过扇形面积计算 $\pi$ 的近似值](images/pi.pdf){width=40%}
+```{#fig:pi .plot:tikz caption="通过扇形面积计算 $\pi$ 的近似值" width=40%}
+\begin{tikzpicture}
+	\draw (0,0)--(0,4);
+	\draw (0,0)--(4,0);
+	\draw (4,0) arc[start angle=0,end angle=90,radius=4cm];
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+	\draw (0,0)--(0,4);
+	\draw (0,0)--(4,0);
+	\draw (4,0) arc[start angle=0,end angle=90,radius=4cm];
+	\draw (0,3.995) rectangle(0.4,0);
+	\draw (0.4, 3.95474) rectangle(0.8,0);
+	\draw (0.8, 3.87298) rectangle(1.2,0);
+	\draw (1.2, 3.747) rectangle (1.6,0);
+	\draw (1.6, 3.57211) rectangle (2.0,0);
+	\draw (2, 3.34066) rectangle (2.4,0);
+	\draw (2.4, 3.03974) rectangle (2.8,0);
+	\draw (2.8, 2.64575) rectangle (3.2,0);
+	\draw (3.2, 2.10713) rectangle (3.6,0);
+	\draw (3.6, 1.249) rectangle (4,0);
+\end{tikzpicture}
+```	
 
 这些长方形的面积之和近似等于四分之一圆的面积。分的长方形越多，近似值与 $\pi$ 越逼近。对于每个长方形来说，宽度 $w$ 等于半径除以长方形的个数，高度 $h$ 与长方形的位置有关。假设某个长方形在水平方向上的中点为 $x$，那么它的高度 $h$ 可以通过下面的距离公式得到：$$h=\sqrt{r^2-x^2}$$
 
 因此，每个长方形的面积为 $h \times w$。
 
-清用任意语言编写一个程序，通过把四分之一圆分为 10000 个长方形来计算 $\pi$ 的近似值。
+请用任意语言编写一个程序，通过把四分之一圆分为 10000 个长方形来计算 $\pi$ 的近似值。
 
 ::: {.solu}
 ```bash
