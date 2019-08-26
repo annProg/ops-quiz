@@ -31,7 +31,13 @@ Zabbix, Prometheus, Open-falcon, TICK
 Jekins, Drone, Gitlab CI
 :::
 
-(@) 你知道或者用过那些虚拟机管理软件？
+(@) 常用的远程登录 Linux 服务器的工具有哪些？
+
+::: {.solu}
+XShell, Putty, OpenSSH
+:::
+
+(@) 你用过或者知道那些虚拟机管理软件？
 
 ::: {.solu}
 VMware, VirtualBox
@@ -112,12 +118,6 @@ ss -antp |grep 9099
 可以通过 /etc/motd 或者 /etc/profile.d/ 下的脚本实现
 :::
 
-(@) 常用的远程登录 Linux 服务器的工具有哪些？
-
-::: {.solu}
-XShell, Putty, OpenSSH
-:::
-
 (@) 如何设置 nameserver？某个业务的域名即将迁移到新的 IP，如何事先测试域名用新 IP 是否正常工作？
 
 ::: {.solu}
@@ -195,7 +195,7 @@ push:
 开放作答
 :::
 
-(@) 请简单描述搭建一个有独立域名，支持 https 的网站的流程。
+(@) 请简单描述搭建一个有独立域名，支持 HTTPS 的网站的流程。
 
 ::: {.solu}
 开放作答
