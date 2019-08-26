@@ -1,31 +1,31 @@
 
 # 2 分题（50 分）
 
-(@) 列出你知道的 Linux 发行版及其 *包管理工具*。
+(@) 列出常见的 Linux 发行版及其 *包管理工具*。
 
 :::{.solu}
 yum:  CentOS, Redhat, Fedora；apt:  Debian, Ubuntu, Deepin；apk:  Alpine；pacman:  Arch Linux
 :::
 
-(@) 列出你知道的容器编排软件。
+(@) 列出常见的容器编排软件。
 
 ::: {.solu}
 Kubernetes, Docker Swarm, Mesos + Marathon
 :::
 
-(@) 列出你知道的开源存储系统。
+(@) 列出常见的开源存储系统。
 
 ::: {.solu}
 Ceph, GlusterFS, HDFS, Minio
 :::
 
-(@) 列出你知道的监控工具。
+(@) 列出常见的监控工具。
 
 ::: {.solu}
 Zabbix, Prometheus, Open-falcon, TICK
 :::
 
-(@) 列出你知道的持续集成工具。
+(@) 列出常见的持续集成工具。
 
 ::: {.solu}
 Jekins, Drone, Gitlab CI
@@ -189,7 +189,7 @@ push:
 
 # 8 分题（40 分）
 
-(@) 假设服务器 root 密码管理存在以下问题：a) 所有服务器使用少数几个 root 密码； b) root 密码基本不变更； c) root 密码未加密存储，并且会被有些同事直接记录到 wiki 上；d) 有同事直接使用 root 密码登录，难以审计。请设计一个 root 密码管理方案，实现 root 密码的随机生成，加密存储及限制查询和使用。（提示：可以考虑使用 gpg 加密 root 密码）
+(@) 假设服务器 root 密码管理存在以下问题：a) 所有服务器使用少数几个 root 密码； b) root 密码基本不变更； c) root 密码未加密存储，并且会被有些同事直接记录到 wiki 上；d) 有同事直接使用 root 账号登录，难以审计。请设计一个 root 密码管理方案，实现 root 密码的随机生成，加密存储及限制查询和使用。（提示：可以考虑使用 gpg 加密 root 密码）
 
 ::: {.solu}
 开放作答
@@ -211,18 +211,16 @@ echo |awk '{sum=0;t=1;for(i=1;i<10001;i++) {sum=sum-(-1)^(i%2)/t;t=t+2}}END{prin
 ```
 :::
 
-(@) 请用任意编程语言实现正整数翻转，比如 数字 1234 翻转为 4321。
-
-::: {.solu}
-```bash
-echo 1234 |awk '{t=0;for(n=$1;n>0;n=int(n/10)){t=n%10 + t*10}}END{print t}'
-```
-:::
-
 (@) 有一个程序，功能是发起 http 请求探测 url 是否存活，运行一段时间后会报 `cannot assign requested address` 错误，查看监控发现运行该程序的服务器有大量 `close-wait` 状态，可能是什么原因？如何解决？
 
 ::: {.solu}
 未关闭 HTTP 请求。HTTP 服务端主动关闭请求，但是程序没有关闭连接，一直停留在 `close-wait` 状态，导致端口被占满。
+:::
+
+(@) Kubernetes 中，Ingress Nginx 对容器网络有很强的依赖性，如果容器网络中断，Nginx Upstream 将全部超时，影响范围很大。已知在服务器重启时，Calico（Kubernetes 网络插件）需要几分钟的时间来恢复容器网络，但是 Ingress Pod 却可以在数十秒内启动。因此有必要在机器重启时检测容器网络是否正常，不正常则应禁止该节点处理流量。现计划在开机时执行一个脚本来检测容器网络，检测不通过则使用 iptables 关闭 80，443 端口，直到容器网络正常之后再删除相应 iptables 规则。请编写该脚本并说明部署方式。已知满足以下 2 条，则认为容器网络正常：a）`ip route |grep bird |wc -l` 应大于 1；b）`dig @169.169.0.2 +time=1 kubernetes.default.svc.cluster.local` 应正常响应。此方案只解决了 Ingress 问题，对于业务容器，如依赖 CoreDNS，则仍然会受影响。如果你有更好的方案，可以直接回答你的方案。（提示：此问题涉及的三方：业务 Pod，网络插件，Kubernetes，谁是问题根源？最好由谁来解决此问题？）
+
+::: {.solu}
+开放作答
 :::
 
 # 10 分题（10 分）
