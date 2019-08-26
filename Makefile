@@ -5,6 +5,9 @@ FILE = ops-quiz-art-elegantpaper.pdf
 all: build clean
 build: quiz solution
 
+answer:
+	cd answer
+	latexmk -xelatex answer.tex
 quiz:
 	panbook art --style=elegantpaper $(DEBUG) $(CJK)
 	mv build/$(FILE) build/运维工程师笔试.pdf
