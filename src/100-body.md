@@ -1,7 +1,7 @@
 
 # 2 分题（50 分）
 
-(@) 列出常见的 Linux 发行版及其 *包管理工具*。
+(@) 列出常见的 Linux 发行版及其包管理工具。
 
 :::{.solu}
 yum:  CentOS, Redhat, Fedora；apt:  Debian, Ubuntu, Deepin；apk:  Alpine；pacman:  Arch Linux
@@ -43,44 +43,40 @@ XShell, Putty, OpenSSH
 VMware, VirtualBox
 :::
 
-(@) 查看服务器逻辑 cpu 个数，内存大小。
+(@) 查看服务器的基本信息：a）逻辑 cpu 个数；b）内存大小；c）品牌型号；d）内核版本；e）发行版名称版本号；
 
 ::: {.solu}
 ```bash
 cat /proc/cpuinfo |grep "processor" |wc -l
 free
-```
-:::
-
-(@) 查看服务器的 品牌型号，唯一标识符。
-
-::: {.solu}
-```bash
 dmidecode -t system
+uname -r
+cat /etc/*-release
 ```
 :::
 
-(@) 找出当前目录下大于 1G 的文件。
+(@) Every command fails with `command not found`{.bash}. How to trace the source of the error and resolve it?
 
 ::: {.solu}
 ```bash
-find ./ -size +1G
+echo $PATH
+fix $PATH in ~/.bash_profile /etc/profile
 ```
 :::
 
-(@) 用什么工具可以查看服务器的 RAID 级别？
+(@) 找出当前目录下大于 1G 的日志文件并删除。
+
+::: {.solu}
+```bash
+find ./ -size +1G -exec rm -f {} \;
+```
+:::
+
+(@) 如何查看服务器的 RAID 级别？如何查看服务器的**物理硬盘**数量和容量？
 
 :::{.solu}
 ```bash
 MegaCli -ldinfo -lall -aall
-hpssacli ctrl all show config
-```
-:::
-
-(@) 查看服务器的**物理硬盘**数量和容量。
-
-:::{.solu}
-```bash
 MegaCli -pdlist -aall
 hpssacli ctrl all show config
 ```
@@ -103,16 +99,16 @@ mount -t xfs /dev/sdb1 /data
 先执行 chattr +i /data1，再挂载
 :::
 
-(@) 找出 9099 端口被什么进程占用。
+(@) 使用 Vim 完成以下任务： a）新建，更新，保存文件；b）查找替换关键词；c）复制行，删除行，跳转行。
 
 ::: {.solu}
 ```bash
-lsof -i :9099
-ss -antp |grep 9099
+vim filename
+i,ESC-:wq
+ESC-/,ESC-:1,$s/patern/replace/g
+nyy,nd,nG
 ```
 :::
-
-(@) 在登录服务器时显示一段提示信息（机器业务，联系人，状态等）。
 
 ::: {.solu}
 可以通过 /etc/motd 或者 /etc/profile.d/ 下的脚本实现
@@ -129,6 +125,24 @@ ss -antp |grep 9099
 
 ::: {.solu}
 http 80, https 443, smtp 25, ftp 21, ssh 22, dns 53
+:::
+
+(@) 如何检测远程主机的 80 端口是否开放？
+
+:::{.solu}
+```bash
+telnet host 80
+nmap -p 80 host
+```
+:::
+
+(@) 找出 9099 端口被什么进程占用。
+
+::: {.solu}
+```bash
+lsof -i :9099
+ss -antp |grep 9099
+```
 :::
 
 (@) 常见 HTTP 状态码及其含义。
@@ -166,10 +180,15 @@ ss -ant |awk '{print $1}' |sort |uniq -c |sort -n
 ```
 :::
 
-(@) git 如何拉取代码，创建分支，提交代码，push 代码？
+(@) 列出基本的 git 命令。
 
 ::: {.solu}
-git pull, git checkout -b, git commit, git push
+```bash
+git init # create a new local repository
+git commit "message" # commit changes to head
+git status # list the files you've added with git add and also commit any files you've changed since then
+git push origin master # send changes to the master branch of your remote repository
+```
 :::
 
 (@) docker 镜像仓库允许提交重复的 tag，为了防止提交了重复的 tag，计划使用代码库（git）的 tag 作为 docker 镜像的 tag，如果代码库没有 tag，则用 revision id 做为镜像 tag，比如，一个镜像的 tag 可能是 `v1.3-738-g1211a2e`。请写一个 Makefile 实现此需求。
