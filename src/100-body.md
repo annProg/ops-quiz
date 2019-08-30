@@ -59,6 +59,7 @@ cat /etc/*-release
 
 ::: {.solu}
 ```bash
+bash --login -x
 echo $PATH
 fix $PATH in ~/.bash_profile /etc/profile
 ```
@@ -99,6 +100,13 @@ mount -t xfs /dev/sdb1 /data
 先执行 chattr +i /data1，再挂载
 :::
 
+(@) 服务器重启之后 ping 不通了，有可能是什么原因？如何解决？
+
+::: {.solu}
+1. 可能未配置默认网关。通过管理卡登录，修复默认网关。
+2. 可能磁盘坏了，挂载不上或者 /etc/fstab 有错误。进入修复模式修正错误。
+:::
+
 (@) 使用 Vim 完成以下任务： a）新建，更新，保存文件；b）查找替换关键词；c）复制行，删除行，跳转行。
 
 ::: {.solu}
@@ -108,10 +116,6 @@ i,ESC-:wq
 ESC-/,ESC-:1,$s/patern/replace/g
 nyy,nd,nG
 ```
-:::
-
-::: {.solu}
-可以通过 /etc/motd 或者 /etc/profile.d/ 下的脚本实现
 :::
 
 (@) 如何设置 nameserver？某个业务的域名即将迁移到新的 IP，如何事先测试域名用新 IP 是否正常工作？
@@ -160,13 +164,7 @@ ss -antp |grep 9099
 4. 对于某些场景，比如负载均衡器，通常有大量域名解析到负载均衡器，在故障摘除某个 IP 时，只需要改变 CNAME 域名的解析地址即可，如果用的时 A 记录，那就需要更改大量域名的 A 记录
 :::
 
-(@) IP 10.1.2.130，掩码 255.255.255.128 ，用 CIDR 形式表示该网段，并给出该网段的可用 IP。
-
-::: {.solu}
-10.1.2.128/25  ; 10.1.2.129 - 10.1.2.254
-:::
-
-(@) Kubernetes 是一个流行的容器编排工具，其网络模型的基本原则是每个 Pod（容器组，Kubernetes 管理容器的最小单位）有一个独立的 IP 地址，集群中所有 Pod 能够通过 Pod IP 直接互相访问。现需要规划一个 Kubernetes 集群，每个节点分配一个掩码为 `/24` 的 IP 段，要求至少满足 25400 个 Pod 的需求，并且不能使用宿主机的 10.0.0.0/8 网段，请给出最小网段规划。
+(@) Kubernetes 是一个流行的容器编排工具，其网络模型的基本原则是为每个 Pod（容器组，Kubernetes 管理容器的最小单位）分配一个唯一的 IP 地址，集群中所有 Pod 能够通过 Pod IP 直接互相访问。现需要规划一个 Kubernetes 集群，每个节点分配一个掩码为 `/24` 的 IP 段，要求至少满足 25400 个 Pod 的需求，并且不能使用宿主机的 10.0.0.0/8 网段，请给出最小网段规划。
 
 ::: {.solu}
 172.[16-31].0.0/17
@@ -180,15 +178,10 @@ ss -ant |awk '{print $1}' |sort |uniq -c |sort -n
 ```
 :::
 
-(@) 列出基本的 git 命令。
+(@) How to check default route and routing table?
 
 ::: {.solu}
-```bash
-git init # create a new local repository
-git commit "message" # commit changes to head
-git status # list the files you've added with git add and also commit any files you've changed since then
-git push origin master # send changes to the master branch of your remote repository
-```
+Using the commands `netstat -nr`, `route -n` or `ip route show` we can see the default route and routing tables.
 :::
 
 (@) docker 镜像仓库允许提交重复的 tag，为了防止提交了重复的 tag，计划使用代码库（git）的 tag 作为 docker 镜像的 tag，如果代码库没有 tag，则用 revision id 做为镜像 tag，比如，一个镜像的 tag 可能是 `v1.3-738-g1211a2e`。请写一个 Makefile 实现此需求。
