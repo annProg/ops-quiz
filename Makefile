@@ -10,9 +10,9 @@ answer:
 	latexmk -xelatex answer.tex
 quiz:
 	panbook art --style=elegantpaper $(DEBUG) $(CJK)
-	mv build/$(FILE) build/运维工程师笔试.pdf
+	mv build/$(FILE) build/ops-quiz.pdf
 solution:
 	panbook art --style=elegantpaper $(DEBUG) $(CJK) -M ext-wrap-solu:true
-	mv build/$(FILE) build/运维工程师笔试-附答案.pdf
+	mv build/$(FILE) build/ops-quiz-solution.pdf
 clean:
 	panbook clean
