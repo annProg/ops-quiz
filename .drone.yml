@@ -3,7 +3,7 @@ name: default
 
 workspace:
   base: /book
-  path: art
+  path: ops-quiz
 
 steps:
 - name: build
